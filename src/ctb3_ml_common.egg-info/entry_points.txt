@@ -1,0 +1,3 @@
+[console_scripts]
+ml-common-benchmark = ml_common.cli:benchmark
+ml-common-validate = ml_common.cli:validate
