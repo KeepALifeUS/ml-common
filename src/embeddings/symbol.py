@@ -1,6 +1,6 @@
 """
 Symbol Embeddings - Learnable Symbol Identity Representations
-Context7 Enterprise Patterns for Multi-Asset Trading
+Multi-Asset Trading
 
 Provides 4-dimensional embeddings for each of the 4 trading symbols:
 - BTCUSDT: [btc_0, btc_1, btc_2, btc_3]
@@ -37,139 +37,139 @@ _SYMBOL_EMBEDDINGS: Dict[str, np.ndarray] = {}
 
 
 def initialize_symbol_embeddings(
-    symbols: Optional[List[str]] = None,
-    embedding_dim: int = EMBEDDING_DIM,
-    seed: Optional[int] = None
+ symbols: Optional[List[str]] = None,
+ embedding_dim: int = EMBEDDING_DIM,
+ seed: Optional[int] = None
 ) -> Dict[str, np.ndarray]:
-    """
-    Initialize random symbol embeddings
+ """
+ Initialize random symbol embeddings
 
-    These are just starting points - the neural network will learn better representations
-    during training (similar to word2vec initialization).
+ These are just starting points - the neural network will learn better representations
+ during training (similar to word2vec initialization).
 
-    Args:
-        symbols: List of symbols (defaults to ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT'])
-        embedding_dim: Dimension per symbol (default 4)
-        seed: Random seed for reproducibility
+ Args:
+ symbols: List of symbols (defaults to ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT'])
+ embedding_dim: Dimension per symbol (default 4)
+ seed: Random seed for reproducibility
 
-    Returns:
-        Dict of symbol -> embedding array (shape: embedding_dim,)
-    """
-    global _SYMBOL_EMBEDDINGS
+ Returns:
+ Dict of symbol -> embedding array (shape: embedding_dim,)
+ """
+ global _SYMBOL_EMBEDDINGS
 
-    if symbols is None:
-        symbols = DEFAULT_SYMBOLS
+ if symbols is None:
+ symbols = DEFAULT_SYMBOLS
 
-    if seed is not None:
-        np.random.seed(seed)
+ if seed is not None:
+ np.random.seed(seed)
 
-    _SYMBOL_EMBEDDINGS = {}
-    for symbol in symbols:
-        # Initialize with small random values (Gaussian distribution)
-        # Using Xavier/Glorot initialization scaled for embedding dimension
-        scale = np.sqrt(2.0 / embedding_dim)
-        embedding = np.random.randn(embedding_dim).astype(np.float32) * scale
-        _SYMBOL_EMBEDDINGS[symbol] = embedding
+ _SYMBOL_EMBEDDINGS = {}
+ for symbol in symbols:
+ # Initialize with small random values (Gaussian distribution)
+ # Using Xavier/Glorot initialization scaled for embedding dimension
+ scale = np.sqrt(2.0 / embedding_dim)
+ embedding = np.random.randn(embedding_dim).astype(np.float32) * scale
+ _SYMBOL_EMBEDDINGS[symbol] = embedding
 
-    logger.info(f"Initialized {len(symbols)} symbol embeddings with dim={embedding_dim}")
-    return _SYMBOL_EMBEDDINGS.copy()
+ logger.info(f"Initialized {len(symbols)} symbol embeddings with dim={embedding_dim}")
+ return _SYMBOL_EMBEDDINGS.copy
 
 
 def get_symbol_embedding(symbol: str, embedding_dim: int = EMBEDDING_DIM) -> np.ndarray:
-    """
-    Get embedding for a single symbol
+ """
+ Get embedding for a single symbol
 
-    Args:
-        symbol: Symbol name (e.g., 'BTCUSDT')
-        embedding_dim: Embedding dimension
+ Args:
+ symbol: Symbol name (e.g., 'BTCUSDT')
+ embedding_dim: Embedding dimension
 
-    Returns:
-        np.ndarray: Embedding vector (shape: embedding_dim,)
-    """
-    global _SYMBOL_EMBEDDINGS
+ Returns:
+ np.ndarray: Embedding vector (shape: embedding_dim,)
+ """
+ global _SYMBOL_EMBEDDINGS
 
-    # Initialize if not already done
-    if not _SYMBOL_EMBEDDINGS:
-        initialize_symbol_embeddings()
+ # Initialize if not already done
+ if not _SYMBOL_EMBEDDINGS:
+ initialize_symbol_embeddings
 
-    # Return embedding if exists
-    if symbol in _SYMBOL_EMBEDDINGS:
-        return _SYMBOL_EMBEDDINGS[symbol].copy()
+ # Return embedding if exists
+ if symbol in _SYMBOL_EMBEDDINGS:
+ return _SYMBOL_EMBEDDINGS[symbol].copy
 
-    # Create new embedding for unknown symbol
-    logger.warning(f"Unknown symbol {symbol}, creating new random embedding")
-    scale = np.sqrt(2.0 / embedding_dim)
-    embedding = np.random.randn(embedding_dim).astype(np.float32) * scale
-    _SYMBOL_EMBEDDINGS[symbol] = embedding
+ # Create new embedding for unknown symbol
+ logger.warning(f"Unknown symbol {symbol}, creating new random embedding")
+ scale = np.sqrt(2.0 / embedding_dim)
+ embedding = np.random.randn(embedding_dim).astype(np.float32) * scale
+ _SYMBOL_EMBEDDINGS[symbol] = embedding
 
-    return embedding
+ return embedding
 
 
 def extract_symbol_embeddings(
-    symbols: Optional[List[str]] = None,
-    embedding_dim: int = EMBEDDING_DIM
+ symbols: Optional[List[str]] = None,
+ embedding_dim: int = EMBEDDING_DIM
 ) -> np.ndarray:
-    """
-    Extract symbol embeddings for all symbols
+ """
+ Extract symbol embeddings for all symbols
 
-    Args:
-        symbols: List of symbols (defaults to ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT'])
-        embedding_dim: Dimension per symbol (default 4)
+ Args:
+ symbols: List of symbols (defaults to ['BTCUSDT', 'ETHUSDT', 'BNBUSDT', 'SOLUSDT'])
+ embedding_dim: Dimension per symbol (default 4)
 
-    Returns:
-        np.ndarray: Concatenated embeddings (shape: num_symbols * embedding_dim,)
-                   For 4 symbols × 4 dims = 16 total dimensions
+ Returns:
+ np.ndarray: Concatenated embeddings (shape: num_symbols * embedding_dim,)
+ For 4 symbols × 4 dims = 16 total dimensions
 
-    Example:
-        >>> embeddings = extract_symbol_embeddings()
-        >>> embeddings.shape
-        (16,)
-        >>> # embeddings = [btc_0, btc_1, btc_2, btc_3, eth_0, ..., sol_3]
-    """
-    if symbols is None:
-        symbols = DEFAULT_SYMBOLS
+ Example:
+ >>> embeddings = extract_symbol_embeddings
+ >>> embeddings.shape
+ (16,)
+ >>> # embeddings = [btc_0, btc_1, btc_2, btc_3, eth_0, ..., sol_3]
+ """
+ if symbols is None:
+ symbols = DEFAULT_SYMBOLS
 
-    # Handle empty symbol list
-    if len(symbols) == 0:
-        return np.array([], dtype=np.float32)
+ # Handle empty symbol list
+ if len(symbols) == 0:
+ return np.array([], dtype=np.float32)
 
-    # Initialize if needed
-    if not _SYMBOL_EMBEDDINGS:
-        initialize_symbol_embeddings(symbols, embedding_dim)
+ # Initialize if needed
+ if not _SYMBOL_EMBEDDINGS:
+ initialize_symbol_embeddings(symbols, embedding_dim)
 
-    # Concatenate all embeddings
-    embeddings_list = []
-    for symbol in symbols:
-        embedding = get_symbol_embedding(symbol, embedding_dim)
-        embeddings_list.append(embedding)
+ # Concatenate all embeddings
+ embeddings_list = []
+ for symbol in symbols:
+ embedding = get_symbol_embedding(symbol, embedding_dim)
+ embeddings_list.append(embedding)
 
-    # Stack into single array
-    result = np.concatenate(embeddings_list)
+ # Stack into single array
+ result = np.concatenate(embeddings_list)
 
-    assert result.shape[0] == len(symbols) * embedding_dim, \
-        f"Shape mismatch: {result.shape[0]} != {len(symbols) * embedding_dim}"
+ assert result.shape[0] == len(symbols) * embedding_dim, \
+ f"Shape mismatch: {result.shape[0]} != {len(symbols) * embedding_dim}"
 
-    return result
+ return result
 
 
 def load_symbol_embeddings(embeddings: Dict[str, np.ndarray]) -> None:
-    """
-    Load pre-trained symbol embeddings (from trained model)
+ """
+ Load pre-trained symbol embeddings (from trained model)
 
-    Args:
-        embeddings: Dict of symbol -> embedding array
-    """
-    global _SYMBOL_EMBEDDINGS
-    _SYMBOL_EMBEDDINGS = embeddings.copy()
-    logger.info(f"Loaded {len(embeddings)} pre-trained symbol embeddings")
+ Args:
+ embeddings: Dict of symbol -> embedding array
+ """
+ global _SYMBOL_EMBEDDINGS
+ _SYMBOL_EMBEDDINGS = embeddings.copy
+ logger.info(f"Loaded {len(embeddings)} pre-trained symbol embeddings")
 
 
-def get_all_embeddings() -> Dict[str, np.ndarray]:
-    """Get all current symbol embeddings"""
-    global _SYMBOL_EMBEDDINGS
-    if not _SYMBOL_EMBEDDINGS:
-        initialize_symbol_embeddings()
-    return _SYMBOL_EMBEDDINGS.copy()
+def get_all_embeddings -> Dict[str, np.ndarray]:
+ """Get all current symbol embeddings"""
+ global _SYMBOL_EMBEDDINGS
+ if not _SYMBOL_EMBEDDINGS:
+ initialize_symbol_embeddings
+ return _SYMBOL_EMBEDDINGS.copy
 
 
 # Initialize on module import with default symbols

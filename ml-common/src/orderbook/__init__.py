@@ -1,6 +1,6 @@
 """
 Order Book Feature Engineering Module
-Context7 Enterprise Patterns for Market Microstructure Analysis
+Market Microstructure Analysis
 
 This module provides lightweight, Numba-optimized functions for extracting
 features from order book data for the 768-dimensional state vector.
@@ -18,84 +18,84 @@ Architecture:
 - spread.py: Absolute/relative spread, effective spread, volatility
 
 Usage:
-    from ml_common.orderbook import calculate_bid_ask_imbalance, calculate_depth_metrics
+ from ml_common.orderbook import calculate_bid_ask_imbalance, calculate_depth_metrics
 
-    # Extract from CCXT orderbook
-    orderbook = exchange.fetch_order_book('BTC/USDT', limit=20)
+ # Extract from CCXT orderbook
+ orderbook = exchange.fetch_order_book('BTC/USDT', limit=20)
 
-    imbalance_features = calculate_bid_ask_imbalance(
-        bids=orderbook['bids'],
-        asks=orderbook['asks'],
-        levels=5
-    )
-    # Returns: [imbalance_ratio, vw_imbalance, cumulative_delta, toxicity, noise]
+ imbalance_features = calculate_bid_ask_imbalance(
+ bids=orderbook['bids'],
+ asks=orderbook['asks'],
+ levels=5
+ )
+ # Returns: [imbalance_ratio, vw_imbalance, cumulative_delta, toxicity, noise]
 """
 
 from .imbalance import (
-    calculate_bid_ask_imbalance,
-    calculate_volume_weighted_imbalance,
-    calculate_cumulative_delta,
-    calculate_order_flow_toxicity,
-    calculate_microstructure_noise,
+ calculate_bid_ask_imbalance,
+ calculate_volume_weighted_imbalance,
+ calculate_cumulative_delta,
+ calculate_order_flow_toxicity,
+ calculate_microstructure_noise,
 )
 
 from .depth import (
-    calculate_depth_metrics,
-    calculate_bid_depth,
-    calculate_ask_depth,
-    calculate_depth_imbalance,
-    calculate_depth_slope,
+ calculate_depth_metrics,
+ calculate_bid_depth,
+ calculate_ask_depth,
+ calculate_depth_imbalance,
+ calculate_depth_slope,
 )
 
 from .spread import (
-    calculate_spread_metrics,
-    calculate_absolute_spread,
-    calculate_relative_spread,
-    calculate_effective_spread,
-    calculate_quoted_spread,
-    calculate_realized_spread,
-    calculate_spread_volatility,
+ calculate_spread_metrics,
+ calculate_absolute_spread,
+ calculate_relative_spread,
+ calculate_effective_spread,
+ calculate_quoted_spread,
+ calculate_realized_spread,
+ calculate_spread_volatility,
 )
 
 from .orderbook_features import (
-    OrderbookFeatureCalculator,
-    OrderbookSnapshot,
-    OrderbookWall,
+ OrderbookFeatureCalculator,
+ OrderbookSnapshot,
+ OrderbookWall,
 )
 
 from .orderbook_query import OrderbookQuery
 
 __all__ = [
-    # Imbalance (5 functions)
-    "calculate_bid_ask_imbalance",
-    "calculate_volume_weighted_imbalance",
-    "calculate_cumulative_delta",
-    "calculate_order_flow_toxicity",
-    "calculate_microstructure_noise",
+ # Imbalance (5 functions)
+ "calculate_bid_ask_imbalance",
+ "calculate_volume_weighted_imbalance",
+ "calculate_cumulative_delta",
+ "calculate_order_flow_toxicity",
+ "calculate_microstructure_noise",
 
-    # Depth (5 functions)
-    "calculate_depth_metrics",
-    "calculate_bid_depth",
-    "calculate_ask_depth",
-    "calculate_depth_imbalance",
-    "calculate_depth_slope",
+ # Depth (5 functions)
+ "calculate_depth_metrics",
+ "calculate_bid_depth",
+ "calculate_ask_depth",
+ "calculate_depth_imbalance",
+ "calculate_depth_slope",
 
-    # Spread (6 functions)
-    "calculate_spread_metrics",
-    "calculate_absolute_spread",
-    "calculate_relative_spread",
-    "calculate_effective_spread",
-    "calculate_quoted_spread",
-    "calculate_realized_spread",
-    "calculate_spread_volatility",
+ # Spread (6 functions)
+ "calculate_spread_metrics",
+ "calculate_absolute_spread",
+ "calculate_relative_spread",
+ "calculate_effective_spread",
+ "calculate_quoted_spread",
+ "calculate_realized_spread",
+ "calculate_spread_volatility",
 
-    # OrderbookFeatureCalculator (3 classes, 20 features)
-    "OrderbookFeatureCalculator",
-    "OrderbookSnapshot",
-    "OrderbookWall",
+ # OrderbookFeatureCalculator (3 classes, 20 features)
+ "OrderbookFeatureCalculator",
+ "OrderbookSnapshot",
+ "OrderbookWall",
 
-    # OrderbookQuery (Day 3.2: PostgreSQL integration)
-    "OrderbookQuery",
+ # OrderbookQuery (Day 3.2: PostgreSQL integration)
+ "OrderbookQuery",
 ]
 
 __version__ = "1.0.0"

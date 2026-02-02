@@ -16,18 +16,18 @@ from orderbook import calculate_bid_ask_imbalance, calculate_depth_metrics, calc
 from cross_asset import extract_correlation_features, extract_spread_features, extract_beta_features
 
 def benchmark(name: str, func, args, target_ms: float, iterations: int = 100):
-    """Benchmark a function"""
-    times = []
-    for _ in range(iterations):
-        start = time.perf_counter()
-        func(*args)
-        end = time.perf_counter()
-        times.append((end - start) * 1000.0)
+ """Benchmark a function"""
+ times = []
+ for _ in range(iterations):
+ start = time.perf_counter
+ func(*args)
+ end = time.perf_counter
+ times.append((end - start) * 1000.0)
 
-    avg = np.mean(times)
-    status = "✅ PASS" if avg < target_ms else "❌ FAIL"
-    print(f"{name:30s}: {avg:7.3f} ms / {target_ms:6.2f} ms  {status}")
-    return avg < target_ms
+ avg = np.mean(times)
+ status = "✅ PASS" if avg < target_ms else "❌ FAIL"
+ print(f"{name:30s}: {avg:7.3f} ms / {target_ms:6.2f} ms {status}")
+ return avg < target_ms
 
 print("="*70)
 print("ML-COMMON PERFORMANCE PROFILING")
@@ -49,12 +49,12 @@ portfolio = {'positions': {'BTCUSDT': 0.5, 'ETHUSDT': 2.0}, 'cash': 5000.0, 'tot
 price_dict = {'BTCUSDT': 50000, 'ETHUSDT': 3000}
 history_data = []
 for i in range(168):
-    history_data.append({
-        'timestamp': timestamp - timedelta(hours=168-i),
-        'total_value': 100000 + np.random.randn() * 1000,
-        'unrealized_pnl': 0,
-        'realized_pnl': 0
-    })
+ history_data.append({
+ 'timestamp': timestamp - timedelta(hours=168-i),
+ 'total_value': 100000 + np.random.randn * 1000,
+ 'unrealized_pnl': 0,
+ 'realized_pnl': 0
+ })
 history = pd.DataFrame(history_data)
 results.append(benchmark("Portfolio", lambda: (extract_position_features(portfolio, price_dict), extract_performance_features(history, 168)), [], 3.0, 100))
 
@@ -65,10 +65,10 @@ results.append(benchmark("Orderbook", lambda: (calculate_bid_ask_imbalance(bids,
 
 # 5. Cross-Asset (target: <5ms)
 price_dict_full = {
-    'BTCUSDT': np.random.randn(168) * 100 + 50000,
-    'ETHUSDT': np.random.randn(168) * 50 + 3000,
-    'BNBUSDT': np.random.randn(168) * 10 + 400,
-    'SOLUSDT': np.random.randn(168) * 5 + 100
+ 'BTCUSDT': np.random.randn(168) * 100 + 50000,
+ 'ETHUSDT': np.random.randn(168) * 50 + 3000,
+ 'BNBUSDT': np.random.randn(168) * 10 + 400,
+ 'SOLUSDT': np.random.randn(168) * 5 + 100
 }
 results.append(benchmark("Cross-Asset", lambda: (extract_correlation_features(price_dict_full, window=24), extract_spread_features(price_dict_full), extract_beta_features(price_dict_full)), [], 5.0, 50))
 
@@ -77,7 +77,7 @@ total_pass = sum(results)
 total = len(results)
 print(f"Overall: {total_pass}/{total} tests passed")
 if total_pass == total:
-    print("✅ ALL PERFORMANCE TARGETS MET!")
+ print("✅ ALL PERFORMANCE TARGETS MET!")
 else:
-    print(f"❌ {total - total_pass} test(s) failed - optimization needed")
+ print(f"❌ {total - total_pass} test(s) failed - optimization needed")
 print("="*70)

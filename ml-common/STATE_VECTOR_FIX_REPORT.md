@@ -8,15 +8,15 @@
 
 ## Problem Statement
 
-StateVectorBuilder возвращал **87% нулей** (только 2.6% non-zero features) из-за незаполненных STUB методов:
-- `_build_technical_features()` - 160 dims
-- `_build_delta_history()` - 370 dims
-- `_build_portfolio_features()` - 50 dims
-- `_build_volume_features()` - 32 dims
-- `_build_cross_asset_features()` - 20 dims
-- `_build_regime_features()` - 10 dims
+StateVectorBuilder returned **87% zero** (only 2.6% non-zero features) due to incomplete STUB methods:
+- `_build_technical_features` - 160 dims
+- `_build_delta_history` - 370 dims
+- `_build_portfolio_features` - 50 dims
+- `_build_volume_features` - 32 dims
+- `_build_cross_asset_features` - 20 dims
+- `_build_regime_features` - 10 dims
 
-**Impact**: ML model получал бесполезные данные, обучение было невозможно.
+**Impact**: ML model received useless data, training was impossible.
 
 ---
 
@@ -24,7 +24,7 @@ StateVectorBuilder возвращал **87% нулей** (только 2.6% non-
 
 ### 1. Technical Indicators (160 dims) - ✅ **91.5% filled**
 
-Реализовано 40 индикаторов на каждый из 4 символов:
+Implemented 40 indicators on each from 4 symbols:
 
 **Momentum indicators**:
 - RSI (14, 21, 28 periods)
@@ -66,7 +66,7 @@ StateVectorBuilder возвращал **87% нулей** (только 2.6% non-
 
 ### 2. Delta History (370 dims) - ✅ **49.0% filled**
 
-Реализовано историческое отслеживание price dynamics:
+Implemented historical tracking price dynamics:
 
 **Per-symbol features (180 dims = 4 symbols × 45)**:
 - Returns over 9 periods (1h, 2h, 4h, 8h, 12h, 24h, 48h, 72h, 168h)
@@ -89,7 +89,7 @@ StateVectorBuilder возвращал **87% нулей** (только 2.6% non-
 
 ### 3. Portfolio Features (50 dims) - ✅ **Implementation complete** (0% in training mode)
 
-Реализовано полное portfolio state tracking:
+Implemented full portfolio state tracking:
 
 **Global metrics (4 dims)**:
 - Capital (normalized)
@@ -114,7 +114,7 @@ StateVectorBuilder возвращал **87% нулей** (только 2.6% non-
 
 ### 4. Volume Features (32 dims) - ✅ **83.1% filled**
 
-Реализовано 8 volume indicators на символ:
+Implemented 8 volume indicators on symbol:
 - Volume ratio vs SMA(20, 50)
 - Volume trend (1h, 4h, 24h changes)
 - Volume percentile (rank in 168h window)
@@ -125,7 +125,7 @@ StateVectorBuilder возвращал **87% нулей** (только 2.6% non-
 
 ### 5. Cross-Asset Features (20 dims) - ✅ **60.6% filled**
 
-Реализовано inter-symbol relationship tracking:
+Implemented inter-symbol relationship tracking:
 - Correlation matrix (6 pairs)
 - Price spreads vs BTC (3 symbols)
 - Beta vs BTC (3 symbols, rolling 72h)
@@ -135,7 +135,7 @@ StateVectorBuilder возвращал **87% нулей** (только 2.6% non-
 
 ### 6. Regime Features (10 dims) - ✅ **82.8% filled**
 
-Реализовано market regime detection:
+Implemented market regime detection:
 - Volatility regime (BTC) - low/medium/high
 - Trend regime (BTC) - down/sideways/up
 - Market phase (24h momentum)
@@ -151,7 +151,7 @@ StateVectorBuilder возвращал **87% нулей** (только 2.6% non-
 
 ### 7. Symbol Embeddings (16 dims) - ✅ **100% filled**
 
-Реализовано static embeddings (4 dims per symbol):
+Implemented static embeddings (4 dims per symbol):
 - Market cap tier
 - Volatility tier
 - Liquidity tier
@@ -163,7 +163,7 @@ Based on 2025 market knowledge. In production, these will be learned.
 
 ### 8. Temporal Embeddings (10 dims) - ✅ **91.0% filled**
 
-Реализовано cyclical time encoding:
+Implemented cyclical time encoding:
 - Hour of day (sin/cos)
 - Day of week (sin/cos)
 - Day of month (sin/cos)
@@ -177,32 +177,32 @@ Based on 2025 market knowledge. In production, these will be learned.
 
 ### Before Fix
 ```
-Total elements:     129,024
-Non-zero elements:  3,355 (2.6%)
-Zero elements:      125,669 (97.4%)
+Total elements: 129,024
+Non-zero elements: 3,355 (2.6%)
+Zero elements: 125,669 (97.4%)
 ```
 
 ### After Fix
 ```
-Total elements:     129,024
-Non-zero elements:  70,477 (54.6%)
-Zero elements:      58,547 (45.4%)
+Total elements: 129,024
+Non-zero elements: 70,477 (54.6%)
+Zero elements: 58,547 (45.4%)
 ```
 
 ### Per-Feature Group Analysis
 
-| Feature Group     | Dims | Non-zero % | Status |
+| Feature Group | Dims | Non-zero % | Status |
 |-------------------|------|------------|--------|
-| ohlcv             | 20   | 100.0%     | ✅ Complete |
-| technical         | 160  | 91.5%      | ✅ Excellent |
-| volume            | 32   | 83.1%      | ✅ Good |
-| symbol_embed      | 16   | 100.0%     | ✅ Complete |
-| temporal_embed    | 10   | 91.0%      | ✅ Excellent |
-| regime            | 10   | 82.8%      | ✅ Good |
-| cross_asset       | 20   | 60.6%      | ✅ Acceptable |
-| delta_history     | 370  | 49.0%      | ⚠️ Expected (early timesteps) |
-| orderbook         | 80   | 0.0%       | ℹ️ Requires real data |
-| portfolio         | 50   | 0.0%       | ℹ️ Training mode (correct) |
+| ohlcv | 20 | 100.0% | ✅ Complete |
+| technical | 160 | 91.5% | ✅ Excellent |
+| volume | 32 | 83.1% | ✅ Good |
+| symbol_embed | 16 | 100.0% | ✅ Complete |
+| temporal_embed | 10 | 91.0% | ✅ Excellent |
+| regime | 10 | 82.8% | ✅ Good |
+| cross_asset | 20 | 60.6% | ✅ Acceptable |
+| delta_history | 370 | 49.0% | ⚠️ Expected (early timesteps) |
+| orderbook | 80 | 0.0% | ℹ️ Requires real data |
+| portfolio | 50 | 0.0% | ℹ️ Training mode (correct) |
 
 ### Effective Fill Rate
 
@@ -241,7 +241,7 @@ Effective fill rate: 70,477 / (638 × 168) = 65.8%
 - Added `import talib` for technical indicators
 - Implemented 6 major methods (~600 lines of code)
 - All values properly normalized to [-1, 1] or [0, 1]
-- Comprehensive NaN handling with `np.nan_to_num()`
+- Comprehensive NaN handling with `np.nan_to_num`
 - Proper exception handling with logging
 - Domain-knowledge based feature engineering
 
@@ -258,19 +258,19 @@ Effective fill rate: 70,477 / (638 × 168) = 65.8%
 ### Optional Improvements (not blockers)
 
 1. **Orderbook Features (80 dims)** - 0%
-   - Requires real orderbook snapshots
-   - Will be filled during live trading
-   - Not critical for initial training
+ - Requires real orderbook snapshots
+ - Will be filled during live trading
+ - Not critical for initial training
 
 2. **Performance Optimization**
-   - Target: <30ms build time
-   - Current: 140-180ms
-   - Opportunity: Vectorization, caching
+ - Target: <30ms build time
+ - Current: 140-180ms
+ - Opportunity: Vectorization, caching
 
 3. **Feature Quality**
-   - Delta history: 49% → can be improved by filling early timesteps with partial data
-   - Cross-asset: 60.6% → can add more pair combinations
-   - More sophisticated regime detection
+ - Delta history: 49% → can be improved by filling early timesteps with partial data
+ - Cross-asset: 60.6% → can add more pair combinations
+ - More sophisticated regime detection
 
 ---
 
@@ -306,14 +306,14 @@ The StateVectorBuilder now provides **high-quality, meaningful features** for ML
 ## Files Modified
 
 1. `/home/vlad/ML-Framework/packages/ml-common/src/fusion/state_vector.py`
-   - Lines modified: 355-981 (6 methods, ~600 lines)
-   - Added: TA-Lib import
-   - Implemented: technical, volume, cross_asset, regime, portfolio, delta_history, symbol_embed, temporal_embed
+ - Lines modified: 355-981 (6 methods, ~600 lines)
+ - Added: TA-Lib import
+ - Implemented: technical, volume, cross_asset, regime, portfolio, delta_history, symbol_embed, temporal_embed
 
 2. `/home/vlad/ML-Framework/packages/ml-common/test_state_vector_fix.py` (created)
-   - Validation test script
-   - Synthetic data generation
-   - Per-feature group analysis
+ - Validation test script
+ - Synthetic data generation
+ - Per-feature group analysis
 
 ---
 
@@ -321,7 +321,7 @@ The StateVectorBuilder now provides **high-quality, meaningful features** for ML
 ```
 fix(ml): implement StateVectorBuilder features - resolve 87% zeros blocker
 
-Реализовано 8 feature groups в StateVectorBuilder:
+Implemented 8 feature groups in StateVectorBuilder:
 - Technical indicators (160 dims): 40 TA-Lib indicators per symbol (91.5% filled)
 - Delta history (370 dims): multi-period returns, volatility, correlations (49% filled)
 - Portfolio features (50 dims): positions, PnL, risk metrics (training-ready)

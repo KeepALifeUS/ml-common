@@ -1,7 +1,7 @@
 """
-Technical Indicators Module для ML Common
+Technical Indicators Module for ML Common
 
-High-performance technical analysis indicators implementing Context7 patterns.
+High-performance technical analysis indicators implementing .
 Consolidates and optimizes indicator calculations from multiple ML packages.
 
 Available indicators:
@@ -13,75 +13,75 @@ Available indicators:
 """
 
 from .technical import (
-    # Core calculation functions
-    calculate_sma,
-    calculate_ema,
-    calculate_wma,
-    calculate_rsi,
-    calculate_macd,
-    calculate_bollinger_bands,
-    calculate_atr,
-    calculate_stochastic,
-    calculate_williams_r,
+ # Core calculation functions
+ calculate_sma,
+ calculate_ema,
+ calculate_wma,
+ calculate_rsi,
+ calculate_macd,
+ calculate_bollinger_bands,
+ calculate_atr,
+ calculate_stochastic,
+ calculate_williams_r,
 
-    # Main indicator class
-    TechnicalIndicators,
-    IndicatorConfig,
+ # Main indicator class
+ TechnicalIndicators,
+ IndicatorConfig,
 
-    # Result types
-    MADCResult,
-    BollingerBandsResult,
-    StochasticResult
+ # Result types
+ MADCResult,
+ BollingerBandsResult,
+ StochasticResult
 )
 
 from .volatility import (
-    calculate_standard_deviation,
-    calculate_true_range,
-    calculate_average_true_range,
-    calculate_keltner_channels,
-    calculate_donchian_channels,
-    VolatilityIndicators
+ calculate_standard_deviation,
+ calculate_true_range,
+ calculate_average_true_range,
+ calculate_keltner_channels,
+ calculate_donchian_channels,
+ VolatilityIndicators
 )
 
 from .volume import (
-    calculate_obv,
-    calculate_vwap,
-    calculate_mfi,
-    calculate_ad_line,
-    calculate_volume_profile,
-    VolumeIndicators
+ calculate_obv,
+ calculate_vwap,
+ calculate_mfi,
+ calculate_ad_line,
+ calculate_volume_profile,
+ VolumeIndicators
 )
 
 __all__ = [
-    # Technical indicators (moving averages, momentum)
-    "calculate_sma",
-    "calculate_ema",
-    "calculate_wma",
-    "calculate_rsi",
-    "calculate_macd",
-    "calculate_bollinger_bands",
-    "calculate_atr",
-    "calculate_stochastic",
-    "calculate_williams_r",
-    "TechnicalIndicators",
-    "IndicatorConfig",
-    "MADCResult",
-    "BollingerBandsResult",
-    "StochasticResult",
+ # Technical indicators (moving averages, momentum)
+ "calculate_sma",
+ "calculate_ema",
+ "calculate_wma",
+ "calculate_rsi",
+ "calculate_macd",
+ "calculate_bollinger_bands",
+ "calculate_atr",
+ "calculate_stochastic",
+ "calculate_williams_r",
+ "TechnicalIndicators",
+ "IndicatorConfig",
+ "MADCResult",
+ "BollingerBandsResult",
+ "StochasticResult",
 
-    # Volatility indicators
-    "calculate_standard_deviation",
-    "calculate_true_range",
-    "calculate_average_true_range",
-    "calculate_keltner_channels",
-    "calculate_donchian_channels",
-    "VolatilityIndicators",
+ # Volatility indicators
+ "calculate_standard_deviation",
+ "calculate_true_range",
+ "calculate_average_true_range",
+ "calculate_keltner_channels",
+ "calculate_donchian_channels",
+ "VolatilityIndicators",
 
-    # Volume indicators
-    "calculate_obv",
-    "calculate_vwap",
-    "calculate_mfi",
-    "calculate_ad_line",
-    "calculate_volume_profile",
-    "VolumeIndicators"
+ # Volume indicators
+ "calculate_obv",
+ "calculate_vwap",
+ "calculate_mfi",
+ "calculate_ad_line",
+ "calculate_volume_profile",
+ "VolumeIndicators"
 ]
