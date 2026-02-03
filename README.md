@@ -1,34 +1,34 @@
-# 🧠 ML Common - Unified Machine Learning Utilities
+# ML Common - Unified Machine Learning Utilities
 
 > **Enterprise-grade consolidated ML utilities for Crypto Trading Bot v5.0**
 > • High-performance • Type-safe • Production-ready
 
-## 🎯 Overview
+## Overview
 
 ML Common consolidates **5000+ lines of duplicated mathematical functions** from 38+ ML packages into a single, optimized, enterprise-grade library. Built with architectural patterns for maximum performance and reliability.
 
-**🎉 NEW: Week 2 Enhancement - 768-Dimensional State Vector Builder**
+**NEW: Week 2 Enhancement - 768-Dimensional State Vector Builder**
 
 The package now includes a **production-ready state vector builder** that constructs 768-dimensional feature vectors for autonomous AI crypto trading. This critical component bridges raw market data and neural networks with <30ms construction time.
 
-### 🚀 Key Features
+### Key Features
 
-- **🔢 Technical Indicators**: 40 indicators (SMA, EMA, RSI, MACD, Bollinger Bands, ATR, Stochastic, etc.)
-- **📊 Data Preprocessing**: Normalization, scaling, feature engineering, outlier detection
-- **📈 Evaluation Metrics**: Sharpe ratio, maximum drawdown, win rate, profit factor
-- **🧪 Backtesting**: Strategy validation, performance analysis, risk metrics
-- **🎨 Pattern Recognition**: Candlestick patterns, chart patterns, trend detection
-- **📖 Order Book Analysis**: Bid-ask imbalance, depth metrics, spread dynamics (20 dims)
-- **🔗 Cross-Asset Correlation**: Multi-symbol relationships, spreads, beta calculations (20 dims)
-- **🌍 Market Regime Detection**: Volatility, trend, time-based classification (10 dims)
-- **💼 Portfolio State Tracking**: Positions, PnL, risk metrics, exposure analysis (50 dims)
-- **🧬 Symbol & Temporal Embeddings**: Learnable representations (26 dims total)
-- **⭐ 768-Dim State Vector Builder**: THE CRITICAL autonomous AI integration component
-- **⚡ High Performance**: Numba acceleration, vectorized operations, <30ms state construction
-- **🛡️ Type Safety**: Full type hints, Pydantic validation, runtime checks
-- **🏗️ Architecture**: Enterprise patterns, observability, monitoring
+- **Technical Indicators**: 40 indicators (SMA, EMA, RSI, MACD, Bollinger Bands, ATR, Stochastic, etc.)
+- **Data Preprocessing**: Normalization, scaling, feature engineering, outlier detection
+- **Evaluation Metrics**: Sharpe ratio, maximum drawdown, win rate, profit factor
+- **Backtesting**: Strategy validation, performance analysis, risk metrics
+- **Pattern Recognition**: Candlestick patterns, chart patterns, trend detection
+- **Order Book Analysis**: Bid-ask imbalance, depth metrics, spread dynamics (20 dims)
+- **Cross-Asset Correlation**: Multi-symbol relationships, spreads, beta calculations (20 dims)
+- **Market Regime Detection**: Volatility, trend, time-based classification (10 dims)
+- **Portfolio State Tracking**: Positions, PnL, risk metrics, exposure analysis (50 dims)
+- **Symbol & Temporal Embeddings**: Learnable representations (26 dims total)
+- **768-Dim State Vector Builder**: THE CRITICAL autonomous AI integration component
+- **High Performance**: Numba acceleration, vectorized operations, <30ms state construction
+- **Type Safety**: Full type hints, Pydantic validation, runtime checks
+- **Architecture**: Enterprise patterns, observability, monitoring
 
-## 📦 Installation
+## Installation
 
 ```bash
 # Basic installation
@@ -47,7 +47,7 @@ pip install -e .[dev]
 
 ```
 
-## 🚀 Quick Start
+## Quick Start
 
 ### Technical Indicators
 
@@ -114,59 +114,59 @@ print(f"Max Drawdown: {results.max_drawdown:.2%}")
 
 ```
 
-## 📚 Module Structure
+## Module Structure
 
 ```
 
 ml_common/
-├── indicators/ # Technical analysis indicators (Week 1 ✅)
+├── indicators/ # Technical analysis indicators (Week 1)
 │ ├── technical.py # 40 indicators: SMA, EMA, RSI, MACD, ADX, etc.
 │ ├── volatility.py # ATR, Bollinger Bands, etc.
 │ └── volume.py # OBV, MFI, VWAP, etc.
-├── orderbook/ # Order book microstructure (Week 1 ✅)
+├── orderbook/ # Order book microstructure (Week 1)
 │ ├── imbalance.py # Bid-ask imbalance analysis
 │ ├── depth.py # Market depth metrics
 │ └── spread.py # Spread dynamics
-├── cross_asset/ # Multi-symbol correlation (Week 1 ✅)
+├── cross_asset/ # Multi-symbol correlation (Week 1)
 │ ├── correlation.py # Cross-symbol correlations
 │ ├── spreads.py # Inter-asset spread analysis
 │ └── beta.py # Beta coefficient calculations
-├── regime/ # Market regime classification (Week 1 ✅)
+├── regime/ # Market regime classification (Week 1)
 │ ├── volatility.py # Volatility regime detection
 │ ├── trend.py # Trend classification
 │ └── market_hours.py # Time-based regime features
-├── portfolio/ # Portfolio state tracking (Week 2 ✅)
+├── portfolio/ # Portfolio state tracking (Week 2)
 │ ├── state.py # Position tracking, PnL, exposure
 │ ├── performance.py # Historical performance metrics
 │ └── risk.py # Risk calculations
-├── embeddings/ # Symbol & temporal embeddings (Week 2 ✅)
+├── embeddings/ # Symbol & temporal embeddings (Week 2)
 │ ├── symbol.py # Learnable symbol representations (16 dims)
 │ └── temporal.py # Time-based cyclic features (10 dims)
-├── fusion/ # ⭐ CRITICAL: State vector builder (Week 2 ✅)
+├── fusion/ # CRITICAL: State vector builder (Week 2)
 │ ├── state_vector.py # 768-dim state vector constructor
 │ └── windowing.py # Rolling window management
-├── preprocessing/ # Data preprocessing utilities (Core ✅)
+├── preprocessing/ # Data preprocessing utilities (Core)
 │ ├── normalization.py # Scaling and normalization
 │ ├── feature_engineering.py # Feature creation
 │ └── data_cleaning.py # Outlier detection, missing values
-├── evaluation/ # Performance evaluation (Core ✅)
+├── evaluation/ # Performance evaluation (Core)
 │ ├── metrics.py # Sharpe, Sortino, Calmar ratios
 │ └── backtesting.py # Strategy validation
-├── utils/ # Utility functions (Core ✅)
+├── utils/ # Utility functions (Core)
 │ ├── math_utils.py # Mathematical helpers
 │ ├── time_series.py # Time series utilities
 │ └── data_loader.py # Data loading helpers
-└── patterns/ # Pattern recognition (Core ✅)
+└── patterns/ # Pattern recognition (Core)
  ├── candlestick.py # Candlestick patterns
  └── chart_patterns.py # Chart pattern detection
 
 ```
 
-## 🏗️ Architecture
+## Architecture
 
 ML Common implements enterprise patterns:
 
-### 🎯 Core Principles
+### Core Principles
 
 - **Performance First**: Numba JIT compilation, vectorized operations
 - **Type Safety**: Full type hints, runtime validation
@@ -174,7 +174,7 @@ ML Common implements enterprise patterns:
 - **Reliability**: Error handling, graceful degradation
 - **Scalability**: Modular design, efficient memory usage
 
-### 🛡️ Enterprise Features
+### Enterprise Features
 
 ```python
 from ml_common.indicators import TechnicalIndicators
@@ -196,7 +196,7 @@ indicators = TechnicalIndicators(
 
 ```
 
-## ⚡ Performance
+## Performance
 
 ML Common is optimized for high-frequency trading:
 
@@ -206,7 +206,7 @@ ML Common is optimized for high-frequency trading:
 - **Memory Efficiency**: Optimized data structures
 - **State Vector Construction**: <30ms for 768 dims × 168 timesteps
 
-### Benchmarks (ALL TARGETS MET ✅)
+### Benchmarks (ALL TARGETS MET)
 
 ```
 
@@ -216,15 +216,15 @@ Core Indicators (1000 data points):
 - MACD calculation: ~0.18ms (vs 12.3ms pure Python)
 
 Week 1 Modules (Performance Targets):
-- Orderbook features: 0.030ms (target: 10.0ms) ✅
-- Cross-asset correlation: 3.443ms (target: 5.0ms) ✅
-- Regime detection: 0.080ms (target: 2.0ms) ✅
+- Orderbook features: 0.030ms (target: 10.0ms)
+- Cross-asset correlation: 3.443ms (target: 5.0ms)
+- Regime detection: 0.080ms (target: 2.0ms)
 
 Week 2 Modules (Performance Targets):
-- Portfolio state: 0.132ms (target: 3.0ms) ✅
-- Symbol embeddings: 0.005ms (target: 0.5ms) ✅
-- Temporal embeddings: 0.005ms (target: 0.5ms) ✅
-- State Vector Builder: <30ms (target: 30.0ms) ✅
+- Portfolio state: 0.132ms (target: 3.0ms)
+- Symbol embeddings: 0.005ms (target: 0.5ms)
+- Temporal embeddings: 0.005ms (target: 0.5ms)
+- State Vector Builder: <30ms (target: 30.0ms)
 
 Batch Processing (100 assets):
 - Technical indicators: ~15ms
@@ -233,7 +233,7 @@ Batch Processing (100 assets):
 
 ```
 
-## 🧪 Testing
+## Testing
 
 ```bash
 # Run all tests
@@ -250,7 +250,7 @@ mypy src/
 
 ```
 
-## 📊 API Reference
+## API Reference
 
 ### Core Functions
 
@@ -285,7 +285,7 @@ config = MLCommonConfig(
 
 ```
 
-## 🤝 Contributing
+## Contributing
 
 We welcome contributions! Please see our [Contributing Guide](CONTRIBUTING.md) for details.
 
@@ -299,11 +299,11 @@ pre-commit install
 
 ```
 
-## 📄 License
+## License
 
 MIT License - see [LICENSE](LICENSE) file for details.
 
-## 🔗 Links
+## Links
 
 - **Documentation**: [ml-framework.dev/docs/ml-common](https://ml-framework.dev/docs/ml-common)
 - **API Reference**: [ml-framework.dev/api/ml-common](https://ml-framework.dev/api/ml-common)
@@ -312,4 +312,4 @@ MIT License - see [LICENSE](LICENSE) file for details.
 
 ---
 
-**Built with ❤️ by the ML-Framework Team • Enterprise Architecture**
+**Built with by the ML-Framework Team • Enterprise Architecture**
