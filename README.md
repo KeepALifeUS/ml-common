@@ -310,6 +310,10 @@ MIT License - see [LICENSE](LICENSE) file for details.
 - **Benchmarks**: [ml-framework.dev/benchmarks/ml-common](https://ml-framework.dev/benchmarks/ml-common)
 - **Examples**: [examples/](examples/)
 
+## Changelog
+
+See [CHANGELOG.md](CHANGELOG.md) for release history and version notes.
+
 ---
 
-**Built with by the ML-Framework Team • Enterprise Architecture**
+**Built with ❤️ by the ML-Framework Team • Enterprise Architecture**
